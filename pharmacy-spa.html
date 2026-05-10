@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -9,7 +10,9 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- Google Fonts: Playfair Display + DM Sans -->
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
 
   <!-- Firebase v9 (compat/modular-compat CDN) -->
   <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -31,7 +34,10 @@
       --border: #e2e8f0;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'DM Sans', sans-serif;
       background: var(--mint);
@@ -40,7 +46,12 @@
       overflow-x: hidden;
     }
 
-    h1, h2, h3, .display { font-family: 'Playfair Display', serif; }
+    h1,
+    h2,
+    h3,
+    .display {
+      font-family: 'Playfair Display', serif;
+    }
 
     /* ─── Animated hero background ─── */
     .hero-bg {
@@ -48,13 +59,24 @@
       position: relative;
       overflow: hidden;
     }
+
     .hero-bg::before {
       content: '';
-      position: absolute; inset: 0;
+      position: absolute;
+      inset: 0;
       background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
       animation: bgShift 20s linear infinite;
     }
-    @keyframes bgShift { 0%{background-position:0 0} 100%{background-position:60px 60px} }
+
+    @keyframes bgShift {
+      0% {
+        background-position: 0 0
+      }
+
+      100% {
+        background-position: 60px 60px
+      }
+    }
 
     /* ─── Floating cross icons ─── */
     .cross-float {
@@ -64,20 +86,31 @@
       font-size: 2rem;
       color: #fff;
     }
+
     @keyframes floatUp {
-      0%,100%{transform:translateY(0) rotate(0deg)}
-      50%{transform:translateY(-20px) rotate(10deg)}
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(0deg)
+      }
+
+      50% {
+        transform: translateY(-20px) rotate(10deg)
+      }
     }
 
     /* ─── Cards ─── */
     .card {
       background: var(--surface);
       border-radius: 1.25rem;
-      box-shadow: 0 4px 24px rgba(15,30,46,0.08);
+      box-shadow: 0 4px 24px rgba(15, 30, 46, 0.08);
       border: 1px solid var(--border);
       transition: box-shadow 0.3s;
     }
-    .card:hover { box-shadow: 0 8px 32px rgba(13,148,136,0.15); }
+
+    .card:hover {
+      box-shadow: 0 8px 32px rgba(13, 148, 136, 0.15);
+    }
 
     /* ─── Upload zone ─── */
     .upload-zone {
@@ -87,1054 +120,1236 @@
       cursor: pointer;
       background: #f8fafc;
     }
-    .upload-zone.dragover, .upload-zone:hover {
+
+    .upload-zone.dragover,
+    .upload-zone:hover {
       border-color: var(--teal);
       background: var(--teal-light);
     }
 
     /* ─── Progress bar ─── */
-    .progress-track { background: #e2e8f0; border-radius: 9999px; height: 8px; }
+    .progress-track {
+      background: #e2e8f0;
+      border-radius: 9999px;
+      height: 8px;
+    }
+
     .progress-fill {
-      height: 8px; border-radius: 9999px;
+      height: 8px;
+      border-radius: 9999px;
       background: linear-gradient(90deg, var(--teal), #10b981);
-      transition: width 0.6s cubic-bezier(.4,0,.2,1);
+      transition: width 0.6s cubic-bezier(.4, 0, .2, 1);
     }
 
     /* ─── Status steps ─── */
     .step-dot {
-      width: 36px; height: 36px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.85rem; font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
       border: 2px solid var(--border);
-      background: #f1f5f9; color: var(--muted);
+      background: #f1f5f9;
+      color: var(--muted);
       transition: all 0.4s;
-      position: relative; z-index: 1;
+      position: relative;
+      z-index: 1;
     }
+
     .step-dot.active {
-      background: var(--teal); border-color: var(--teal); color: #fff;
-      box-shadow: 0 0 0 4px rgba(13,148,136,0.18);
+      background: var(--teal);
+      border-color: var(--teal);
+      color: #fff;
+      box-shadow: 0 0 0 4px rgba(13, 148, 136, 0.18);
     }
+
     .step-dot.done {
-      background: #10b981; border-color: #10b981; color: #fff;
+      background: #10b981;
+      border-color: #10b981;
+      color: #fff;
     }
+
     .step-line {
-      flex: 1; height: 2px; background: var(--border); margin: 0 -2px;
+      flex: 1;
+      height: 2px;
+      background: var(--border);
+      margin: 0 -2px;
       transition: background 0.4s;
     }
-    .step-line.done { background: #10b981; }
+
+    .step-line.done {
+      background: #10b981;
+    }
 
     /* ─── Buttons ─── */
     .btn-primary {
       background: linear-gradient(135deg, var(--teal), var(--teal-dark));
-      color: #fff; font-weight: 600; font-size: 0.95rem;
-      padding: 0.75rem 2rem; border-radius: 0.75rem;
-      border: none; cursor: pointer;
-      transition: all 0.25s; box-shadow: 0 4px 16px rgba(13,148,136,0.35);
-      display: inline-flex; align-items: center; gap: 0.5rem;
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.95rem;
+      padding: 0.75rem 2rem;
+      border-radius: 0.75rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s;
+      box-shadow: 0 4px 16px rgba(13, 148, 136, 0.35);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
     }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(13,148,136,0.45); }
-    .btn-primary:active { transform: translateY(0); }
-    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(13, 148, 136, 0.45);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
 
     .btn-secondary {
-      background: white; color: var(--teal);
-      border: 2px solid var(--teal); font-weight: 600;
-      padding: 0.7rem 1.5rem; border-radius: 0.75rem;
-      cursor: pointer; transition: all 0.25s;
-      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: white;
+      color: var(--teal);
+      border: 2px solid var(--teal);
+      font-weight: 600;
+      padding: 0.7rem 1.5rem;
+      border-radius: 0.75rem;
+      cursor: pointer;
+      transition: all 0.25s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
     }
-    .btn-secondary:hover { background: var(--teal); color: #fff; }
+
+    .btn-secondary:hover {
+      background: var(--teal);
+      color: #fff;
+    }
 
     /* ─── Badge ─── */
     .trust-badge {
       background: linear-gradient(135deg, #fef3c7, #fde68a);
       border: 2px solid var(--gold);
       border-radius: 1rem;
-      display: inline-flex; align-items: center; gap: 0.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
       padding: 0.5rem 1rem;
     }
 
     /* ─── Floating call button ─── */
     #callBtn {
-      position: fixed; bottom: 1.75rem; right: 1.75rem; z-index: 999;
+      position: fixed;
+      bottom: 1.75rem;
+      right: 1.75rem;
+      z-index: 999;
       background: linear-gradient(135deg, #22c55e, #16a34a);
-      color: white; border-radius: 9999px;
-      box-shadow: 0 6px 24px rgba(34,197,94,0.45);
+      color: white;
+      border-radius: 9999px;
+      box-shadow: 0 6px 24px rgba(34, 197, 94, 0.45);
       padding: 0.85rem 1.5rem;
-      display: flex; align-items: center; gap: 0.5rem;
-      font-weight: 700; font-size: 0.95rem;
-      cursor: pointer; border: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: none;
       animation: pulse 2.5s infinite;
       transition: transform 0.2s;
     }
-    #callBtn:hover { transform: scale(1.06); }
+
+    #callBtn:hover {
+      transform: scale(1.06);
+    }
+
     @keyframes pulse {
-      0%,100%{box-shadow:0 6px 24px rgba(34,197,94,0.45)}
-      50%{box-shadow:0 6px 36px rgba(34,197,94,0.75)}
+
+      0%,
+      100% {
+        box-shadow: 0 6px 24px rgba(34, 197, 94, 0.45)
+      }
+
+      50% {
+        box-shadow: 0 6px 36px rgba(34, 197, 94, 0.75)
+      }
     }
 
     /* ─── Toast ─── */
     .toast {
-      position: fixed; bottom: 5.5rem; right: 1.75rem; z-index: 9999;
-      min-width: 280px; max-width: 350px;
-      padding: 1rem 1.25rem; border-radius: 0.9rem;
-      font-weight: 500; font-size: 0.9rem;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
-      transform: translateX(120%); transition: transform 0.4s cubic-bezier(.4,0,.2,1);
-      display: flex; align-items: center; gap: 0.75rem;
+      position: fixed;
+      bottom: 5.5rem;
+      right: 1.75rem;
+      z-index: 9999;
+      min-width: 280px;
+      max-width: 350px;
+      padding: 1rem 1.25rem;
+      border-radius: 0.9rem;
+      font-weight: 500;
+      font-size: 0.9rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+      transform: translateX(120%);
+      transition: transform 0.4s cubic-bezier(.4, 0, .2, 1);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
     }
-    .toast.show { transform: translateX(0); }
-    .toast.success { background: #dcfce7; color: #166534; border-left: 4px solid #22c55e; }
-    .toast.error   { background: #fee2e2; color: #991b1b; border-left: 4px solid #ef4444; }
-    .toast.info    { background: #e0f2fe; color: #0369a1; border-left: 4px solid #0ea5e9; }
+
+    .toast.show {
+      transform: translateX(0);
+    }
+
+    .toast.success {
+      background: #dcfce7;
+      color: #166534;
+      border-left: 4px solid #22c55e;
+    }
+
+    .toast.error {
+      background: #fee2e2;
+      color: #991b1b;
+      border-left: 4px solid #ef4444;
+    }
+
+    .toast.info {
+      background: #e0f2fe;
+      color: #0369a1;
+      border-left: 4px solid #0ea5e9;
+    }
 
     /* ─── Upload progress overlay ─── */
     .upload-progress-bar {
-      height: 4px; background: var(--teal-light); border-radius: 0 0 0.5rem 0.5rem;
+      height: 4px;
+      background: var(--teal-light);
+      border-radius: 0 0 0.5rem 0.5rem;
       overflow: hidden;
     }
+
     .upload-progress-fill {
-      height: 100%; background: var(--teal);
-      transition: width 0.3s; width: 0%;
+      height: 100%;
+      background: var(--teal);
+      transition: width 0.3s;
+      width: 0%;
     }
 
     /* ─── Section fade-in ─── */
     .fade-in {
-      opacity: 0; transform: translateY(20px);
+      opacity: 0;
+      transform: translateY(20px);
       animation: fadeIn 0.6s ease forwards;
     }
-    @keyframes fadeIn { to { opacity:1; transform:translateY(0); } }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
     /* ─── Responsive nav ─── */
-    nav a { font-weight: 500; font-size: 0.9rem; transition: color 0.2s; }
-    nav a:hover { color: var(--teal-light); }
+    nav a {
+      font-weight: 500;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--teal-light);
+    }
 
     /* ─── File preview ─── */
     #imagePreviewWrap img {
-      width: 100%; max-height: 180px; object-fit: cover;
-      border-radius: 0.75rem; margin-top: 0.75rem;
+      width: 100%;
+      max-height: 180px;
+      object-fit: cover;
+      border-radius: 0.75rem;
+      margin-top: 0.75rem;
     }
 
     /* scrollbar */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #f1f5f9; }
-    ::-webkit-scrollbar-thumb { background: var(--teal); border-radius: 3px; }
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--teal);
+      border-radius: 3px;
+    }
   </style>
 </head>
+
 <body>
 
-<!-- ══════════════════════════════════════════
+  <!-- ══════════════════════════════════════════
      NAVIGATION
 ══════════════════════════════════════════ -->
-<nav class="hero-bg text-white sticky top-0 z-50 shadow-lg">
-  <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-    <div class="flex items-center gap-3">
-      <!-- Logo Placeholder Spot -->
-      <div class="h-10 w-24 bg-white/20 rounded border border-white/40 flex items-center justify-center text-xs font-bold uppercase tracking-wider cursor-pointer hover:bg-white/30 transition" title="Click to upload your logo" onclick="document.getElementById('logoUpload').click()">
-        <img id="navLogoImg" src="" alt="LOGO" class="hidden h-full w-full object-contain" />
-        <span id="navLogoText">Logo</span>
+  <nav class="hero-bg text-white sticky top-0 z-50 shadow-lg">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <!-- Logo Placeholder Spot -->
+        <div
+          class="h-10 w-24 bg-white/20 rounded border border-white/40 flex items-center justify-center text-xs font-bold uppercase tracking-wider cursor-pointer hover:bg-white/30 transition"
+          title="Click to upload your logo" onclick="document.getElementById('logoUpload').click()">
+          <img id="navLogoImg" src="" alt="LOGO" class="hidden h-full w-full object-contain" />
+          <span id="navLogoText">Logo</span>
+        </div>
+        <input type="file" id="logoUpload" accept="image/*" class="hidden" onchange="handleLogoUpload(event)" />
+        <span class="font-bold text-3xl" style="font-family:'Playfair Display',serif; letter-spacing: 0.5px;">Smart
+          Pharmacy</span>
       </div>
-      <input type="file" id="logoUpload" accept="image/*" class="hidden" onchange="handleLogoUpload(event)" />
-      <span class="font-bold text-3xl" style="font-family:'Playfair Display',serif; letter-spacing: 0.5px;">Smart Pharmacy</span>
+      <div class="hidden md:flex gap-6 text-sm" style="color:rgba(255,255,255,0.85)">
+        <a href="#home">Home</a>
+        <a href="#upload">Upload Rx</a>
+        <a href="#track">Track Order</a>
+        <a href="#trust">Why Us</a>
+      </div>
+      <!-- Mobile menu toggle -->
+      <button id="menuToggle" class="md:hidden text-white focus:outline-none" aria-label="Menu">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
     </div>
-    <div class="hidden md:flex gap-6 text-sm" style="color:rgba(255,255,255,0.85)">
-      <a href="#home">Home</a>
-      <a href="#upload">Upload Rx</a>
-      <a href="#track">Track Order</a>
-      <a href="#trust">Why Us</a>
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="hidden md:hidden px-4 pb-4 flex flex-col gap-3 text-sm"
+      style="color:rgba(255,255,255,0.85)">
+      <a href="#home" onclick="closeMobileMenu()">Home</a>
+      <a href="#upload" onclick="closeMobileMenu()">Upload Rx</a>
+      <a href="#track" onclick="closeMobileMenu()">Track Order</a>
+      <a href="#trust" onclick="closeMobileMenu()">Why Us</a>
     </div>
-    <!-- Mobile menu toggle -->
-    <button id="menuToggle" class="md:hidden text-white focus:outline-none" aria-label="Menu">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-      </svg>
-    </button>
-  </div>
-  <!-- Mobile menu -->
-  <div id="mobileMenu" class="hidden md:hidden px-4 pb-4 flex flex-col gap-3 text-sm" style="color:rgba(255,255,255,0.85)">
-    <a href="#home" onclick="closeMobileMenu()">Home</a>
-    <a href="#upload" onclick="closeMobileMenu()">Upload Rx</a>
-    <a href="#track" onclick="closeMobileMenu()">Track Order</a>
-    <a href="#trust" onclick="closeMobileMenu()">Why Us</a>
-  </div>
-</nav>
+  </nav>
 
 
-<!-- ══════════════════════════════════════════
+  <!-- ══════════════════════════════════════════
      HERO SECTION
 ══════════════════════════════════════════ -->
-<section id="home" class="hero-bg text-white relative" style="min-height:520px">
-  <!-- Floating decorative crosses -->
-  <span class="cross-float" style="top:15%;left:8%;animation-delay:0s">✚</span>
-  <span class="cross-float" style="top:55%;left:82%;animation-delay:2s;font-size:1.5rem">✚</span>
-  <span class="cross-float" style="top:30%;left:68%;animation-delay:4s;font-size:3rem">✚</span>
-  <span class="cross-float" style="top:70%;left:20%;animation-delay:1s;font-size:1.2rem">✚</span>
+  <section id="home" class="hero-bg text-white relative" style="min-height:520px">
+    <!-- Floating decorative crosses -->
+    <span class="cross-float" style="top:15%;left:8%;animation-delay:0s">✚</span>
+    <span class="cross-float" style="top:55%;left:82%;animation-delay:2s;font-size:1.5rem">✚</span>
+    <span class="cross-float" style="top:30%;left:68%;animation-delay:4s;font-size:3rem">✚</span>
+    <span class="cross-float" style="top:70%;left:20%;animation-delay:1s;font-size:1.2rem">✚</span>
 
-  <div class="max-w-6xl mx-auto px-4 py-20 md:py-28 relative z-10">
-    <div class="max-w-2xl">
-      <!-- Trust badge -->
-      <div class="trust-badge mb-6 inline-flex fade-in" style="animation-delay:0.1s">
-        <svg class="w-4 h-4 text-amber-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M10 1l1.94 5.97H18l-4.97 3.61 1.94 5.97L10 13.94 5.03 16.55l1.94-5.97L2 6.97h6.06L10 1z"/>
-        </svg>
-        <span class="text-amber-800 font-semibold text-sm">Pharmacist Verified · Licensed Store</span>
-      </div>
+    <div class="max-w-6xl mx-auto px-4 py-20 md:py-28 relative z-10">
+      <div class="max-w-2xl">
+        <!-- Trust badge -->
+        <div class="trust-badge mb-6 inline-flex fade-in" style="animation-delay:0.1s">
+          <svg class="w-4 h-4 text-amber-600 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd"
+              d="M10 1l1.94 5.97H18l-4.97 3.61 1.94 5.97L10 13.94 5.03 16.55l1.94-5.97L2 6.97h6.06L10 1z" />
+          </svg>
+          <span class="text-amber-800 font-semibold text-sm">Pharmacist Verified · Licensed Store</span>
+        </div>
 
-      <h1 class="text-5xl md:text-7xl font-bold mb-2 leading-tight fade-in" style="animation-delay:0.2s; color:#5eead4; text-shadow: 0 4px 20px rgba(0,0,0,0.2);">
-        Smart Pharmacy
-      </h1>
-      <h2 class="text-3xl md:text-4xl font-bold mb-4 leading-tight fade-in" style="animation-delay:0.3s">
-        Medicine Delivered To Your Door.
-      </h2>
-      <p class="text-lg md:text-xl mb-8 leading-relaxed fade-in" style="color:rgba(255,255,255,0.8);animation-delay:0.4s">
-        Upload your prescription, sit back, and receive your medicines at home. 
-        Every order reviewed by a licensed pharmacist before dispatch.
-      </p>
-      <div class="flex flex-wrap gap-3 fade-in" style="animation-delay:0.5s">
-        <a href="#upload">
-          <button class="btn-primary text-base px-6 py-3">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
-            </svg>
-            Upload Prescription
-          </button>
-        </a>
-        <a href="#track">
-          <button class="btn-secondary text-base px-6 py-3" style="background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.35);color:#fff">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0"/>
-            </svg>
-            Track Order
-          </button>
-        </a>
+        <h1 class="text-5xl md:text-7xl font-bold mb-2 leading-tight fade-in"
+          style="animation-delay:0.2s; color:#5eead4; text-shadow: 0 4px 20px rgba(0,0,0,0.2);">
+          Smart Pharmacy
+        </h1>
+        <h2 class="text-3xl md:text-4xl font-bold mb-4 leading-tight fade-in" style="animation-delay:0.3s">
+          Medicine Delivered To Your Door.
+        </h2>
+        <p class="text-lg md:text-xl mb-8 leading-relaxed fade-in"
+          style="color:rgba(255,255,255,0.8);animation-delay:0.4s">
+          Upload your prescription, sit back, and receive your medicines at home.
+          Every order reviewed by a licensed pharmacist before dispatch.
+        </p>
+        <div class="flex flex-wrap gap-3 fade-in" style="animation-delay:0.5s">
+          <a href="#upload">
+            <button class="btn-primary text-base px-6 py-3">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+              </svg>
+              Upload Prescription
+            </button>
+          </a>
+          <a href="#track">
+            <button class="btn-secondary text-base px-6 py-3"
+              style="background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.35);color:#fff">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0" />
+              </svg>
+              Track Order
+            </button>
+          </a>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Wave bottom -->
-  <div style="position:absolute;bottom:-1px;left:0;width:100%;overflow:hidden;line-height:0">
-    <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;height:60px">
-      <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#f0fdf9"/>
-    </svg>
-  </div>
-</section>
+    <!-- Wave bottom -->
+    <div style="position:absolute;bottom:-1px;left:0;width:100%;overflow:hidden;line-height:0">
+      <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
+        style="display:block;width:100%;height:60px">
+        <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#f0fdf9" />
+      </svg>
+    </div>
+  </section>
 
 
-<!-- ══════════════════════════════════════════
+  <!-- ══════════════════════════════════════════
      STATS STRIP
 ══════════════════════════════════════════ -->
-<section class="max-w-6xl mx-auto px-4 -mt-2 mb-12">
-  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-    <div class="card p-5 text-center fade-in" style="animation-delay:0.1s">
-      <p class="text-3xl font-bold" style="color:var(--teal)">10K+</p>
-      <p class="text-sm mt-1" style="color:var(--muted)">Orders Delivered</p>
+  <section class="max-w-6xl mx-auto px-4 -mt-2 mb-12">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="card p-5 text-center fade-in" style="animation-delay:0.1s">
+        <p class="text-3xl font-bold" style="color:var(--teal)">10K+</p>
+        <p class="text-sm mt-1" style="color:var(--muted)">Orders Delivered</p>
+      </div>
+      <div class="card p-5 text-center fade-in" style="animation-delay:0.2s">
+        <p class="text-3xl font-bold" style="color:var(--teal)">4.9★</p>
+        <p class="text-sm mt-1" style="color:var(--muted)">Average Rating</p>
+      </div>
+      <div class="card p-5 text-center fade-in" style="animation-delay:0.3s">
+        <p class="text-3xl font-bold" style="color:var(--teal)">30min</p>
+        <p class="text-sm mt-1" style="color:var(--muted)">Avg Dispatch Time</p>
+      </div>
+      <div class="card p-5 text-center fade-in" style="animation-delay:0.4s">
+        <p class="text-3xl font-bold" style="color:var(--teal)">100%</p>
+        <p class="text-sm mt-1" style="color:var(--muted)">Licensed Pharmacists</p>
+      </div>
     </div>
-    <div class="card p-5 text-center fade-in" style="animation-delay:0.2s">
-      <p class="text-3xl font-bold" style="color:var(--teal)">4.9★</p>
-      <p class="text-sm mt-1" style="color:var(--muted)">Average Rating</p>
-    </div>
-    <div class="card p-5 text-center fade-in" style="animation-delay:0.3s">
-      <p class="text-3xl font-bold" style="color:var(--teal)">30min</p>
-      <p class="text-sm mt-1" style="color:var(--muted)">Avg Dispatch Time</p>
-    </div>
-    <div class="card p-5 text-center fade-in" style="animation-delay:0.4s">
-      <p class="text-3xl font-bold" style="color:var(--teal)">100%</p>
-      <p class="text-sm mt-1" style="color:var(--muted)">Licensed Pharmacists</p>
-    </div>
-  </div>
-</section>
+  </section>
 
 
-<!-- ══════════════════════════════════════════
+  <!-- ══════════════════════════════════════════
      UPLOAD PRESCRIPTION FORM
 ══════════════════════════════════════════ -->
-<section id="upload" class="max-w-6xl mx-auto px-4 mb-16">
-  <div class="text-center mb-10">
-    <h2 class="text-3xl md:text-4xl font-bold mb-3">Upload Your Prescription</h2>
-    <p style="color:var(--muted)" class="text-base max-w-lg mx-auto">
-      Fill in your details, upload the prescription image, and we'll take care of the rest.
-    </p>
-  </div>
+  <section id="upload" class="max-w-6xl mx-auto px-4 mb-16">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl md:text-4xl font-bold mb-3">Upload Your Prescription</h2>
+      <p style="color:var(--muted)" class="text-base max-w-lg mx-auto">
+        Fill in your details, upload the prescription image, and we'll take care of the rest.
+      </p>
+    </div>
 
-  <div class="grid md:grid-cols-5 gap-8 items-start">
-    <!-- FORM CARD -->
-    <div class="card p-7 md:col-span-3">
-      <form id="rxForm" novalidate>
-        <!-- Name -->
-        <div class="mb-5">
-          <label class="block text-sm font-600 mb-1.5" style="color:var(--text)">Full Name *</label>
-          <input id="fName" type="text" placeholder="e.g. Rahul Sharma" required
-            class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-400 transition"
-            style="background:#f8fafc" />
-          <p class="text-red-500 text-xs mt-1 hidden" id="nameErr">Please enter your name.</p>
-        </div>
+    <div class="grid md:grid-cols-5 gap-8 items-start">
+      <!-- FORM CARD -->
+      <div class="card p-7 md:col-span-3">
+        <form id="rxForm" novalidate>
+          <!-- Name -->
+          <div class="mb-5">
+            <label class="block text-sm font-600 mb-1.5" style="color:var(--text)">Full Name *</label>
+            <input id="fName" type="text" placeholder="e.g. Rahul Sharma" required
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-400 transition"
+              style="background:#f8fafc" />
+            <p class="text-red-500 text-xs mt-1 hidden" id="nameErr">Please enter your name.</p>
+          </div>
 
-        <!-- Phone -->
-        <div class="mb-5">
-          <label class="block text-sm font-600 mb-1.5" style="color:var(--text)">Phone Number *</label>
-          <div class="flex">
-            <span class="px-3 py-3 bg-gray-100 border border-r-0 border-gray-200 rounded-l-xl text-sm text-gray-500">+91</span>
-            <input id="fPhone" type="tel" placeholder="9876543210" required maxlength="10"
-              class="flex-1 px-4 py-3 border border-gray-200 rounded-r-xl text-sm focus:outline-none focus:ring-2 focus:ring-teal-400 transition"
+          <!-- Phone -->
+          <div class="mb-5">
+            <label class="block text-sm font-600 mb-1.5" style="color:var(--text)">Phone Number *</label>
+            <div class="flex">
+              <span
+                class="px-3 py-3 bg-gray-100 border border-r-0 border-gray-200 rounded-l-xl text-sm text-gray-500">+91</span>
+              <input id="fPhone" type="tel" placeholder="9876543210" required maxlength="10"
+                class="flex-1 px-4 py-3 border border-gray-200 rounded-r-xl text-sm focus:outline-none focus:ring-2 focus:ring-teal-400 transition"
+                style="background:#f8fafc" />
+            </div>
+            <p class="text-red-500 text-xs mt-1 hidden" id="phoneErr">Please enter a valid 10-digit number.</p>
+          </div>
+
+          <!-- Address -->
+          <div class="mb-5">
+            <div class="flex justify-between items-end mb-1.5">
+              <label class="block text-sm font-600" style="color:var(--text)">Delivery Address *</label>
+              <button type="button" id="locationBtn"
+                class="text-xs text-teal-600 font-semibold flex items-center gap-1 hover:text-teal-800 transition"
+                onclick="getLocation()">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+                Use GPS Location
+              </button>
+            </div>
+            <textarea id="fAddress" rows="3" placeholder="House No, Street, City, Pincode" required
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-400 transition resize-none"
+              style="background:#f8fafc"></textarea>
+            <p class="text-red-500 text-xs mt-1 hidden" id="addrErr">Please enter your delivery address.</p>
+          </div>
+
+          <!-- Notes -->
+          <div class="mb-6">
+            <label class="block text-sm font-600 mb-1.5" style="color:var(--text)">Additional Notes <span
+                class="text-gray-400 font-normal">(optional)</span></label>
+            <input id="fNotes" type="text" placeholder="Allergies, preferred brand, etc."
+              class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-400 transition"
               style="background:#f8fafc" />
           </div>
-          <p class="text-red-500 text-xs mt-1 hidden" id="phoneErr">Please enter a valid 10-digit number.</p>
-        </div>
 
-        <!-- Address -->
-        <div class="mb-5">
-          <div class="flex justify-between items-end mb-1.5">
-            <label class="block text-sm font-600" style="color:var(--text)">Delivery Address *</label>
-            <button type="button" id="locationBtn" class="text-xs text-teal-600 font-semibold flex items-center gap-1 hover:text-teal-800 transition" onclick="getLocation()">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-              Use GPS Location
-            </button>
+          <!-- Upload Zone -->
+          <div class="mb-6">
+            <label class="block text-sm font-600 mb-1.5" style="color:var(--text)">Prescription Image *</label>
+            <div class="upload-zone p-6 text-center" id="dropZone" onclick="document.getElementById('rxFile').click()">
+              <svg class="w-10 h-10 mx-auto mb-3" style="color:var(--teal)" fill="none" stroke="currentColor"
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+              </svg>
+              <p class="text-sm font-500" style="color:var(--text)">Click or drag & drop your prescription</p>
+              <p class="text-xs mt-1" style="color:var(--muted)">JPG, PNG, PDF — max 5 MB</p>
+              <input type="file" id="rxFile" accept="image/*,.pdf" class="hidden" />
+            </div>
+            <div id="imagePreviewWrap" class="hidden mt-3">
+              <img id="imagePreview" src="" alt="Preview" />
+              <p id="fileName" class="text-xs mt-1" style="color:var(--muted)"></p>
+            </div>
+            <p class="text-red-500 text-xs mt-1 hidden" id="fileErr">Please upload your prescription.</p>
           </div>
-          <textarea id="fAddress" rows="3" placeholder="House No, Street, City, Pincode" required
-            class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-400 transition resize-none"
-            style="background:#f8fafc"></textarea>
-          <p class="text-red-500 text-xs mt-1 hidden" id="addrErr">Please enter your delivery address.</p>
-        </div>
 
-        <!-- Notes -->
-        <div class="mb-6">
-          <label class="block text-sm font-600 mb-1.5" style="color:var(--text)">Additional Notes <span class="text-gray-400 font-normal">(optional)</span></label>
-          <input id="fNotes" type="text" placeholder="Allergies, preferred brand, etc."
-            class="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-teal-400 transition"
-            style="background:#f8fafc" />
-        </div>
-
-        <!-- Upload Zone -->
-        <div class="mb-6">
-          <label class="block text-sm font-600 mb-1.5" style="color:var(--text)">Prescription Image *</label>
-          <div class="upload-zone p-6 text-center" id="dropZone" onclick="document.getElementById('rxFile').click()">
-            <svg class="w-10 h-10 mx-auto mb-3" style="color:var(--teal)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
-            </svg>
-            <p class="text-sm font-500" style="color:var(--text)">Click or drag & drop your prescription</p>
-            <p class="text-xs mt-1" style="color:var(--muted)">JPG, PNG, PDF — max 5 MB</p>
-            <input type="file" id="rxFile" accept="image/*,.pdf" class="hidden" />
+          <!-- Upload progress bar (shown during upload) -->
+          <div id="uploadProgressWrap" class="hidden mb-4">
+            <div class="flex justify-between text-xs mb-1" style="color:var(--muted)">
+              <span>Uploading image…</span>
+              <span id="uploadPct">0%</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" id="uploadBar" style="width:0%"></div>
+            </div>
           </div>
-          <div id="imagePreviewWrap" class="hidden mt-3">
-            <img id="imagePreview" src="" alt="Preview" />
-            <p id="fileName" class="text-xs mt-1" style="color:var(--muted)"></p>
-          </div>
-          <p class="text-red-500 text-xs mt-1 hidden" id="fileErr">Please upload your prescription.</p>
-        </div>
 
-        <!-- Upload progress bar (shown during upload) -->
-        <div id="uploadProgressWrap" class="hidden mb-4">
-          <div class="flex justify-between text-xs mb-1" style="color:var(--muted)">
-            <span>Uploading image…</span>
-            <span id="uploadPct">0%</span>
-          </div>
-          <div class="progress-track"><div class="progress-fill" id="uploadBar" style="width:0%"></div></div>
-        </div>
-
-        <button type="submit" class="btn-primary w-full justify-center text-base py-3" id="submitBtn">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-          </svg>
-          <span id="submitBtnText">Submit Order</span>
-        </button>
-      </form>
-    </div>
-
-    <!-- RIGHT SIDE: Trust + How It Works -->
-    <div class="md:col-span-2 flex flex-col gap-6">
-      <!-- Pharmacist Trust Badge -->
-      <div id="trust" class="card p-6" style="border-left: 4px solid var(--teal)">
-        <div class="flex items-start gap-4 mb-4">
-          <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background:var(--teal-light)">
-            <svg class="w-6 h-6" style="color:var(--teal)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <button type="submit" class="btn-primary w-full justify-center text-base py-3" id="submitBtn">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
+            <span id="submitBtnText">Submit Order</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- RIGHT SIDE: Trust + How It Works -->
+      <div class="md:col-span-2 flex flex-col gap-6">
+        <!-- Pharmacist Trust Badge -->
+        <div id="trust" class="card p-6" style="border-left: 4px solid var(--teal)">
+          <div class="flex items-start gap-4 mb-4">
+            <div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+              style="background:var(--teal-light)">
+              <svg class="w-6 h-6" style="color:var(--teal)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-bold text-base mb-1">Pharmacist Verification</h3>
+              <p class="text-sm" style="color:var(--muted)">Every prescription is reviewed by our licensed pharmacist
+                before medicines are packed and dispatched.</p>
+            </div>
           </div>
-          <div>
-            <h3 class="font-bold text-base mb-1">Pharmacist Verification</h3>
-            <p class="text-sm" style="color:var(--muted)">Every prescription is reviewed by our licensed pharmacist before medicines are packed and dispatched.</p>
+          <div class="trust-badge mt-2">
+            <svg class="w-4 h-4 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd"
+                d="M10 1l1.94 5.97H18l-4.97 3.61 1.94 5.97L10 13.94 5.03 16.55l1.94-5.97L2 6.97h6.06L10 1z" />
+            </svg>
+            <span class="text-amber-800 font-semibold text-xs">Govt. Licensed Pharmacy · Est. 2010</span>
           </div>
         </div>
-        <div class="trust-badge mt-2">
-          <svg class="w-4 h-4 text-amber-600" fill="currentColor" viewBox="0 0 20 20">
-            <path fill-rule="evenodd" d="M10 1l1.94 5.97H18l-4.97 3.61 1.94 5.97L10 13.94 5.03 16.55l1.94-5.97L2 6.97h6.06L10 1z"/>
+
+        <!-- How it works -->
+        <div class="card p-6">
+          <h3 class="font-bold text-base mb-4">How It Works</h3>
+          <div class="flex flex-col gap-4">
+            <div class="flex gap-3 items-start">
+              <div
+                class="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0"
+                style="background:var(--teal)">1</div>
+              <div>
+                <p class="font-600 text-sm">Upload Prescription</p>
+                <p class="text-xs mt-0.5" style="color:var(--muted)">Take a clear photo or scan of your prescription</p>
+              </div>
+            </div>
+            <div class="flex gap-3 items-start">
+              <div
+                class="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0"
+                style="background:var(--teal)">2</div>
+              <div>
+                <p class="font-600 text-sm">Pharmacist Reviews</p>
+                <p class="text-xs mt-0.5" style="color:var(--muted)">Our pharmacist verifies & prepares your order</p>
+              </div>
+            </div>
+            <div class="flex gap-3 items-start">
+              <div
+                class="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0"
+                style="background:var(--teal)">3</div>
+              <div>
+                <p class="font-600 text-sm">Home Delivery</p>
+                <p class="text-xs mt-0.5" style="color:var(--muted)">Medicines delivered to your door in 30–60 min</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Safe medicines note -->
+        <div class="card p-5 flex gap-3 items-center" style="background:#eff6ff;border-color:#bfdbfe">
+          <svg class="w-8 h-8 flex-shrink-0 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20A10 10 0 0012 2z" />
           </svg>
-          <span class="text-amber-800 font-semibold text-xs">Govt. Licensed Pharmacy · Est. 2010</span>
+          <p class="text-xs" style="color:#1e40af">
+            All medicines are sourced from authorised distributors and stored at required temperatures as per pharmacy
+            standards.
+          </p>
         </div>
-      </div>
-
-      <!-- How it works -->
-      <div class="card p-6">
-        <h3 class="font-bold text-base mb-4">How It Works</h3>
-        <div class="flex flex-col gap-4">
-          <div class="flex gap-3 items-start">
-            <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0" style="background:var(--teal)">1</div>
-            <div>
-              <p class="font-600 text-sm">Upload Prescription</p>
-              <p class="text-xs mt-0.5" style="color:var(--muted)">Take a clear photo or scan of your prescription</p>
-            </div>
-          </div>
-          <div class="flex gap-3 items-start">
-            <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0" style="background:var(--teal)">2</div>
-            <div>
-              <p class="font-600 text-sm">Pharmacist Reviews</p>
-              <p class="text-xs mt-0.5" style="color:var(--muted)">Our pharmacist verifies & prepares your order</p>
-            </div>
-          </div>
-          <div class="flex gap-3 items-start">
-            <div class="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0" style="background:var(--teal)">3</div>
-            <div>
-              <p class="font-600 text-sm">Home Delivery</p>
-              <p class="text-xs mt-0.5" style="color:var(--muted)">Medicines delivered to your door in 30–60 min</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Safe medicines note -->
-      <div class="card p-5 flex gap-3 items-center" style="background:#eff6ff;border-color:#bfdbfe">
-        <svg class="w-8 h-8 flex-shrink-0 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M13 16h-1v-4h-1m1-4h.01M12 2a10 10 0 100 20A10 10 0 0012 2z"/>
-        </svg>
-        <p class="text-xs" style="color:#1e40af">
-          All medicines are sourced from authorised distributors and stored at required temperatures as per pharmacy standards.
-        </p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
 
-<!-- ══════════════════════════════════════════
+  <!-- ══════════════════════════════════════════
      SUCCESS CONFIRMATION CARD (hidden by default)
 ══════════════════════════════════════════ -->
-<div id="successCard" class="hidden max-w-xl mx-auto px-4 mb-12">
-  <div class="card p-8 text-center" style="border-top: 4px solid #22c55e">
-    <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style="background:#dcfce7">
-      <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
-      </svg>
-    </div>
-    <h2 class="text-2xl font-bold mb-1">Order Placed!</h2>
-    <p class="text-sm mb-4" style="color:var(--muted)">Your prescription has been received. Our pharmacist will review it shortly.</p>
-    <div class="rounded-xl p-4 mb-5" style="background:#f0fdf4;border:2px dashed #86efac">
-      <p class="text-xs mb-1" style="color:var(--muted)">Your Tracking ID</p>
-      <p class="text-2xl font-bold tracking-widest" style="color:var(--teal)" id="trackingIdDisplay">—</p>
-    </div>
-    <p class="text-xs mb-5" style="color:var(--muted)">Save this ID to track your order below</p>
-    <div class="flex flex-col sm:flex-row gap-3 justify-center">
-      <button onclick="scrollToTrack()" class="btn-primary justify-center">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0"/></svg>
-        Track This Order
-      </button>
-      <button onclick="resetForm()" class="btn-secondary">Place Another Order</button>
+  <div id="successCard" class="hidden max-w-xl mx-auto px-4 mb-12">
+    <div class="card p-8 text-center" style="border-top: 4px solid #22c55e">
+      <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style="background:#dcfce7">
+        <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+      <h2 class="text-2xl font-bold mb-1">Order Placed!</h2>
+      <p class="text-sm mb-4" style="color:var(--muted)">Your prescription has been received. Our pharmacist will review
+        it shortly.</p>
+      <div class="rounded-xl p-4 mb-5" style="background:#f0fdf4;border:2px dashed #86efac">
+        <p class="text-xs mb-1" style="color:var(--muted)">Your Tracking ID</p>
+        <p class="text-2xl font-bold tracking-widest" style="color:var(--teal)" id="trackingIdDisplay">—</p>
+      </div>
+      <p class="text-xs mb-5" style="color:var(--muted)">Save this ID to track your order below</p>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <button onclick="scrollToTrack()" class="btn-primary justify-center">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0" />
+          </svg>
+          Track This Order
+        </button>
+        <button onclick="resetForm()" class="btn-secondary">Place Another Order</button>
+      </div>
     </div>
   </div>
-</div>
 
 
-<!-- ══════════════════════════════════════════
+  <!-- ══════════════════════════════════════════
      TRACK ORDER SECTION
 ══════════════════════════════════════════ -->
-<section id="track" class="max-w-6xl mx-auto px-4 mb-20">
-  <div class="text-center mb-10">
-    <h2 class="text-3xl md:text-4xl font-bold mb-3">Track Your Order</h2>
-    <p style="color:var(--muted)" class="text-base max-w-lg mx-auto">
-      Enter your Tracking ID to get real-time updates on your prescription order.
-    </p>
-  </div>
-
-  <div class="max-w-2xl mx-auto">
-    <!-- Search bar -->
-    <div class="card p-2 flex gap-2 mb-6">
-      <input id="trackInput" type="text" placeholder="Enter Tracking ID (e.g. MED-A1B2C3)"
-        class="flex-1 px-4 py-3 rounded-lg text-sm focus:outline-none font-mono tracking-wide"
-        style="background:#f8fafc;border:1px solid #e2e8f0"
-        onkeyup="if(event.key==='Enter')trackOrder()" />
-      <button onclick="trackOrder()" class="btn-primary px-5 py-2 text-sm">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0"/>
-        </svg>
-        Track
-      </button>
+  <section id="track" class="max-w-6xl mx-auto px-4 mb-20">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl md:text-4xl font-bold mb-3">Track Your Order</h2>
+      <p style="color:var(--muted)" class="text-base max-w-lg mx-auto">
+        Enter your Tracking ID to get real-time updates on your prescription order.
+      </p>
     </div>
 
-    <!-- Tracking Result (hidden by default) -->
-    <div id="trackResult" class="card p-6 hidden">
-      <!-- Order summary -->
-      <div class="flex items-start justify-between flex-wrap gap-3 mb-6">
-        <div>
-          <p class="text-xs mb-0.5" style="color:var(--muted)">Order ID</p>
-          <p class="font-bold font-mono text-base" id="trOrderId">—</p>
-        </div>
-        <div>
-          <p class="text-xs mb-0.5" style="color:var(--muted)">Patient Name</p>
-          <p class="font-semibold text-base" id="trName">—</p>
-        </div>
-        <div>
-          <p class="text-xs mb-0.5" style="color:var(--muted)">Status</p>
-          <span id="trStatusBadge" class="px-3 py-1 rounded-full text-xs font-bold">—</span>
-        </div>
+    <div class="max-w-2xl mx-auto">
+      <!-- Search bar -->
+      <div class="card p-2 flex gap-2 mb-6">
+        <input id="trackInput" type="text" placeholder="Enter Tracking ID (e.g. MED-A1B2C3)"
+          class="flex-1 px-4 py-3 rounded-lg text-sm focus:outline-none font-mono tracking-wide"
+          style="background:#f8fafc;border:1px solid #e2e8f0" onkeyup="if(event.key==='Enter')trackOrder()" />
+        <button onclick="trackOrder()" class="btn-primary px-5 py-2 text-sm">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0" />
+          </svg>
+          Track
+        </button>
       </div>
 
-      <!-- Progress Steps -->
-      <div class="mb-6">
-        <div class="flex items-center" id="progressStepsRow">
-          <!-- Filled by JS -->
-        </div>
-        <!-- Step labels -->
-        <div class="flex justify-between mt-3 px-1" id="progressLabels"></div>
-      </div>
-
-      <!-- Details -->
-      <div class="rounded-xl p-4" style="background:#f8fafc;border:1px solid #e2e8f0">
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+      <!-- Tracking Result (hidden by default) -->
+      <div id="trackResult" class="card p-6 hidden">
+        <!-- Order summary -->
+        <div class="flex items-start justify-between flex-wrap gap-3 mb-6">
           <div>
-            <p class="text-xs mb-0.5" style="color:var(--muted)">Delivery Address</p>
-            <p class="font-500" id="trAddress">—</p>
+            <p class="text-xs mb-0.5" style="color:var(--muted)">Order ID</p>
+            <p class="font-bold font-mono text-base" id="trOrderId">—</p>
           </div>
           <div>
-            <p class="text-xs mb-0.5" style="color:var(--muted)">Order Placed</p>
-            <p class="font-500" id="trDate">—</p>
+            <p class="text-xs mb-0.5" style="color:var(--muted)">Patient Name</p>
+            <p class="font-semibold text-base" id="trName">—</p>
           </div>
+          <div>
+            <p class="text-xs mb-0.5" style="color:var(--muted)">Status</p>
+            <span id="trStatusBadge" class="px-3 py-1 rounded-full text-xs font-bold">—</span>
+          </div>
+        </div>
+
+        <!-- Progress Steps -->
+        <div class="mb-6">
+          <div class="flex items-center" id="progressStepsRow">
+            <!-- Filled by JS -->
+          </div>
+          <!-- Step labels -->
+          <div class="flex justify-between mt-3 px-1" id="progressLabels"></div>
+        </div>
+
+        <!-- Details -->
+        <div class="rounded-xl p-4" style="background:#f8fafc;border:1px solid #e2e8f0">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+            <div>
+              <p class="text-xs mb-0.5" style="color:var(--muted)">Delivery Address</p>
+              <p class="font-500" id="trAddress">—</p>
+            </div>
+            <div>
+              <p class="text-xs mb-0.5" style="color:var(--muted)">Order Placed</p>
+              <p class="font-500" id="trDate">—</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pharmacist note -->
+        <div class="mt-4 p-3 rounded-lg flex gap-2 items-center text-xs" style="background:#fef9c3;color:#854d0e">
+          <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd"
+              d="M10 1l1.94 5.97H18l-4.97 3.61 1.94 5.97L10 13.94 5.03 16.55l1.94-5.97L2 6.97h6.06L10 1z" />
+          </svg>
+          <span>Your prescription is being reviewed by our licensed pharmacist. You'll receive a WhatsApp update
+            soon.</span>
         </div>
       </div>
 
-      <!-- Pharmacist note -->
-      <div class="mt-4 p-3 rounded-lg flex gap-2 items-center text-xs" style="background:#fef9c3;color:#854d0e">
-        <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-          <path fill-rule="evenodd" d="M10 1l1.94 5.97H18l-4.97 3.61 1.94 5.97L10 13.94 5.03 16.55l1.94-5.97L2 6.97h6.06L10 1z"/>
+      <!-- Not found message -->
+      <div id="trackNotFound" class="card p-6 text-center hidden">
+        <svg class="w-12 h-12 mx-auto mb-3 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+            d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-        <span>Your prescription is being reviewed by our licensed pharmacist. You'll receive a WhatsApp update soon.</span>
+        <p class="font-semibold text-base mb-1">Order Not Found</p>
+        <p class="text-sm" style="color:var(--muted)">Please check your Tracking ID and try again.</p>
       </div>
     </div>
-
-    <!-- Not found message -->
-    <div id="trackNotFound" class="card p-6 text-center hidden">
-      <svg class="w-12 h-12 mx-auto mb-3 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-      </svg>
-      <p class="font-semibold text-base mb-1">Order Not Found</p>
-      <p class="text-sm" style="color:var(--muted)">Please check your Tracking ID and try again.</p>
-    </div>
-  </div>
-</section>
+  </section>
 
 
-<!-- ══════════════════════════════════════════
+  <!-- ══════════════════════════════════════════
      FOOTER
 ══════════════════════════════════════════ -->
-<footer class="hero-bg text-white">
-  <div class="max-w-6xl mx-auto px-4 py-10">
-    <div class="grid md:grid-cols-3 gap-8 mb-8">
-      <div>
-        <p class="text-lg font-bold mb-2" style="font-family:'Playfair Display',serif">Smart Pharmacy</p>
-        <p class="text-sm" style="color:rgba(255,255,255,0.7)">Licensed pharmacy delivering medicines at your doorstep. Every order pharmacist-verified.</p>
-      </div>
-      <div>
-        <p class="font-semibold mb-3">Quick Links</p>
-        <div class="flex flex-col gap-1.5 text-sm" style="color:rgba(255,255,255,0.75)">
-          <a href="#upload">Upload Prescription</a>
-          <a href="#track">Track Order</a>
-          <a href="#trust">Why Choose Us</a>
+  <footer class="hero-bg text-white">
+    <div class="max-w-6xl mx-auto px-4 py-10">
+      <div class="grid md:grid-cols-3 gap-8 mb-8">
+        <div>
+          <p class="text-lg font-bold mb-2" style="font-family:'Playfair Display',serif">Smart Pharmacy</p>
+          <p class="text-sm" style="color:rgba(255,255,255,0.7)">Licensed pharmacy delivering medicines at your
+            doorstep. Every order pharmacist-verified.</p>
+        </div>
+        <div>
+          <p class="font-semibold mb-3">Quick Links</p>
+          <div class="flex flex-col gap-1.5 text-sm" style="color:rgba(255,255,255,0.75)">
+            <a href="#upload">Upload Prescription</a>
+            <a href="#track">Track Order</a>
+            <a href="#trust">Why Choose Us</a>
+          </div>
+        </div>
+        <div>
+          <p class="font-semibold mb-3">Contact</p>
+          <div class="text-sm flex flex-col gap-1.5" style="color:rgba(255,255,255,0.75)">
+            <p>📞 +91 XXXXXXXXXX</p>
+            <p>🕐 Mon–Sat: 8 AM – 9 PM</p>
+            <p>📍 Hyderabad, Telangana</p>
+          </div>
         </div>
       </div>
-      <div>
-        <p class="font-semibold mb-3">Contact</p>
-        <div class="text-sm flex flex-col gap-1.5" style="color:rgba(255,255,255,0.75)">
-          <p>📞 +91 XXXXXXXXXX</p>
-          <p>🕐 Mon–Sat: 8 AM – 9 PM</p>
-          <p>📍 Hyderabad, Telangana</p>
-        </div>
+      <div class="border-t pt-5 text-center text-xs"
+        style="border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.5)">
+        © 2025 Smart Pharmacy. All rights reserved. | Govt. Licensed Pharmacy
       </div>
     </div>
-    <div class="border-t pt-5 text-center text-xs" style="border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.5)">
-      © 2025 Smart Pharmacy. All rights reserved. | Govt. Licensed Pharmacy
-    </div>
-  </div>
-</footer>
+  </footer>
 
 
-<!-- ══════════════════════════════════════════
+  <!-- ══════════════════════════════════════════
      FLOATING CALL NOW BUTTON
 ══════════════════════════════════════════ -->
-<button id="callBtn" onclick="callNow()">
-  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-    <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
-  </svg>
-  Call Now
-</button>
+  <button id="callBtn" onclick="callNow()">
+    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+      <path
+        d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+    </svg>
+    Call Now
+  </button>
 
 
-<!-- ══════════════════════════════════════════
+  <!-- ══════════════════════════════════════════
      TOAST NOTIFICATION
 ══════════════════════════════════════════ -->
-<div id="toast" class="toast" role="alert">
-  <span id="toastIcon" class="text-lg">ℹ️</span>
-  <span id="toastMsg"></span>
-</div>
+  <div id="toast" class="toast" role="alert">
+    <span id="toastIcon" class="text-lg">ℹ️</span>
+    <span id="toastMsg"></span>
+  </div>
 
 
-<!-- ══════════════════════════════════════════
+  <!-- ══════════════════════════════════════════
      JAVASCRIPT – FIREBASE & APP LOGIC
 ══════════════════════════════════════════ -->
-<script>
-  // ─────────────────────────────────────────────
-  // 🔧 FIREBASE CONFIGURATION
-  // Replace the values below with YOUR Firebase project config.
-  // Found in Firebase Console → Project Settings → Your Apps → Web App
-  // ─────────────────────────────────────────────
-  const firebaseConfig = {
-    apiKey:            "YOUR_API_KEY",
-    authDomain:        "YOUR_PROJECT_ID.firebaseapp.com",
-    projectId:         "YOUR_PROJECT_ID",
-    storageBucket:     "YOUR_PROJECT_ID.appspot.com",
-    messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-    appId:             "YOUR_APP_ID"
-  };
+  <script>
+    // ─────────────────────────────────────────────
+    // 🔧 FIREBASE CONFIGURATION
+    // Replace the values below with YOUR Firebase project config.
+    // Found in Firebase Console → Project Settings → Your Apps → Web App
+    // ─────────────────────────────────────────────
+    const firebaseConfig = {
+      apiKey: "AIzaSyCDCRNhQZ_bHDtvY_vT6AX6Vv3Uli4Ax0w",
+      authDomain: "pharmacy-477b3.firebaseapp.com",
+      projectId: "pharmacy-477b3",
+      storageBucket: "pharmacy-477b3.firebasestorage.app",
+      messagingSenderId: "242050402700",
+      appId: "1:242050402700:web:b1f6a115ec6fef6a0aaea9",
+      measurementId: "G-JJ9BNSL1N8"
+    };
 
-  // ─────────────────────────────────────────────
-  // 🖼️ IMGBB API KEY (For Free Image Storage)
-  // Get your free key at: https://api.imgbb.com/
-  // ─────────────────────────────────────────────
-  const IMGBB_API_KEY = "YOUR_IMGBB_API_KEY"; // ← replace this
+    // ─────────────────────────────────────────────
+    // 🖼️ IMGBB API KEY (For Free Image Storage)
+    // Get your free key at: https://api.imgbb.com/
+    // ─────────────────────────────────────────────
+    const IMGBB_API_KEY = "fa3b85716c63e3c89e8b76a70abd1f23"; // ← replace this
 
-  // ─────────────────────────────────────────────
-  // 📱 WHATSAPP PHONE NUMBER
-  // Replace with your actual number (with country code, no + sign)
-  // ─────────────────────────────────────────────
-  const WHATSAPP_NUMBER = "91XXXXXXXXXX"; // ← replace this
+    // ─────────────────────────────────────────────
+    // 📱 WHATSAPP PHONE NUMBER
+    // Replace with your actual number (with country code, no + sign)
+    // ─────────────────────────────────────────────
+    const WHATSAPP_NUMBER = "919059850397"; // ← replace this
 
-  // ─────────────────────────────────────────────
-  // 📞 CALL NOW NUMBER
-  // ─────────────────────────────────────────────
-  const CALL_NUMBER = "+91XXXXXXXXXX"; // ← replace this
+    // ─────────────────────────────────────────────
+    // 📞 CALL NOW NUMBER
+    // ─────────────────────────────────────────────
+    const CALL_NUMBER = "+919059850397"; // ← replace this
 
-  // ─────────────────────────────────────────────
-  // 🔥 Initialize Firebase (compat SDK v9)
-  // ─────────────────────────────────────────────
-  firebase.initializeApp(firebaseConfig);
-  const db      = firebase.firestore();   // Firestore database instance
-  const storage = firebase.storage();     // Firebase Storage instance
+    // ─────────────────────────────────────────────
+    // 🔥 Initialize Firebase (compat SDK v9)
+    // ─────────────────────────────────────────────
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();   // Firestore database instance
+    const storage = firebase.storage();     // Firebase Storage instance
 
-  // ─────────────────────────────────────────────
-  // 🆔 Tracking ID Generator
-  // Generates a unique ID like "MED-A1B2C3"
-  // ─────────────────────────────────────────────
-  function generateTrackingId() {
-    const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
-    let id = "MED-";
-    for (let i = 0; i < 6; i++) {
-      id += chars[Math.floor(Math.random() * chars.length)];
-    }
-    return id;
-  }
-
-  // ─────────────────────────────────────────────
-  // 🔔 Toast Notification Helper
-  // type: 'success' | 'error' | 'info'
-  // ─────────────────────────────────────────────
-  function showToast(msg, type = "info", duration = 4000) {
-    const toast = document.getElementById("toast");
-    const icons = { success: "✅", error: "❌", info: "ℹ️" };
-    toast.className = `toast ${type} show`;
-    document.getElementById("toastMsg").textContent = msg;
-    document.getElementById("toastIcon").textContent = icons[type];
-    setTimeout(() => { toast.classList.remove("show"); }, duration);
-  }
-
-  // ─────────────────────────────────────────────
-  // 📁 File Input & Drag-Drop Logic
-  // ─────────────────────────────────────────────
-  const dropZone = document.getElementById("dropZone");
-  const rxFile   = document.getElementById("rxFile");
-
-  // File selected via input
-  rxFile.addEventListener("change", () => handleFileSelect(rxFile.files[0]));
-
-  // Drag over styling
-  dropZone.addEventListener("dragover", (e) => {
-    e.preventDefault();
-    dropZone.classList.add("dragover");
-  });
-  dropZone.addEventListener("dragleave", () => dropZone.classList.remove("dragover"));
-
-  // File dropped
-  dropZone.addEventListener("drop", (e) => {
-    e.preventDefault();
-    dropZone.classList.remove("dragover");
-    const file = e.dataTransfer.files[0];
-    if (file) { rxFile.files = e.dataTransfer.files; handleFileSelect(file); }
-  });
-
-  // Show image preview when file selected
-  function handleFileSelect(file) {
-    if (!file) return;
-    document.getElementById("fileErr").classList.add("hidden");
-    const wrap    = document.getElementById("imagePreviewWrap");
-    const preview = document.getElementById("imagePreview");
-    const name    = document.getElementById("fileName");
-    name.textContent = `📄 ${file.name} (${(file.size/1024).toFixed(1)} KB)`;
-    wrap.classList.remove("hidden");
-    if (file.type.startsWith("image/")) {
-      const reader = new FileReader();
-      reader.onload = (e) => { preview.src = e.target.result; preview.classList.remove("hidden"); };
-      reader.readAsDataURL(file);
-    } else {
-      preview.classList.add("hidden"); // PDF: just show filename
-    }
-  }
-
-  // ─────────────────────────────────────────────
-  // ✅ Form Validation
-  // ─────────────────────────────────────────────
-  function validateForm() {
-    let valid = true;
-
-    const name = document.getElementById("fName").value.trim();
-    const phone = document.getElementById("fPhone").value.trim();
-    const address = document.getElementById("fAddress").value.trim();
-    const file = document.getElementById("rxFile").files[0];
-
-    // Name
-    if (!name) {
-      document.getElementById("nameErr").classList.remove("hidden"); valid = false;
-    } else {
-      document.getElementById("nameErr").classList.add("hidden");
-    }
-    // Phone (10 digits)
-    if (!/^\d{10}$/.test(phone)) {
-      document.getElementById("phoneErr").classList.remove("hidden"); valid = false;
-    } else {
-      document.getElementById("phoneErr").classList.add("hidden");
-    }
-    // Address
-    if (!address || address.length < 10) {
-      document.getElementById("addrErr").classList.remove("hidden"); valid = false;
-    } else {
-      document.getElementById("addrErr").classList.add("hidden");
-    }
-    // File
-    if (!file) {
-      document.getElementById("fileErr").classList.remove("hidden"); valid = false;
-    } else {
-      document.getElementById("fileErr").classList.add("hidden");
-    }
-    return valid;
-  }
-
-  // ─────────────────────────────────────────────
-  // 📤 FORM SUBMIT → Firebase Upload
-  // ─────────────────────────────────────────────
-  document.getElementById("rxForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
-    if (!validateForm()) return;
-
-    const submitBtn  = document.getElementById("submitBtn");
-    const submitText = document.getElementById("submitBtnText");
-    submitBtn.disabled = true;
-    submitText.textContent = "Uploading…";
-
-    const name    = document.getElementById("fName").value.trim();
-    const phone   = document.getElementById("fPhone").value.trim();
-    const address = document.getElementById("fAddress").value.trim();
-    const notes   = document.getElementById("fNotes").value.trim();
-    const file    = document.getElementById("rxFile").files[0];
-
-    // Generate a unique tracking ID for this order
-    const trackingId = generateTrackingId();
-
-    try {
-      // ── STEP 1: Upload prescription image to ImgBB (Free, No Card Required) ──
-      document.getElementById("uploadProgressWrap").classList.remove("hidden");
-      document.getElementById("uploadBar").style.width = "40%";
-      document.getElementById("uploadPct").textContent = "Uploading image...";
-
-      const formData = new FormData();
-      formData.append("image", file);
-      
-      const imgbbResponse = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
-        method: "POST",
-        body: formData
-      });
-      const imgbbData = await imgbbResponse.json();
-
-      if (!imgbbData.success) {
-        throw new Error("Image upload failed: " + (imgbbData.error ? imgbbData.error.message : "Unknown error"));
+    // ─────────────────────────────────────────────
+    // 🆔 Tracking ID Generator
+    // Generates a unique ID like "MED-A1B2C3"
+    // ─────────────────────────────────────────────
+    function generateTrackingId() {
+      const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+      let id = "MED-";
+      for (let i = 0; i < 6; i++) {
+        id += chars[Math.floor(Math.random() * chars.length)];
       }
-      
-      const imageUrl = imgbbData.data.url;
-      document.getElementById("uploadBar").style.width = "100%";
-      document.getElementById("uploadPct").textContent = "100%";
-
-      // ── STEP 2: Write order data to Firestore ──
-      // Collection: "orders" | Document ID: trackingId
-      await db.collection("orders").doc(trackingId).set({
-        trackingId,                   // Unique order ID
-        name,                          // Patient name
-        phone,                         // Patient phone (for reference)
-        address,                       // Delivery address
-        notes,                         // Optional notes
-        prescriptionUrl: imageUrl,     // Firebase Storage download URL
-        status: "Received",            // Initial status
-        createdAt: firebase.firestore.FieldValue.serverTimestamp() // Server timestamp
-      });
-
-      // ── STEP 3: Show success UI ──
-      document.getElementById("rxForm").closest("section").classList.add("hidden");
-      const successCard = document.getElementById("successCard");
-      successCard.classList.remove("hidden");
-      document.getElementById("trackingIdDisplay").textContent = trackingId;
-      successCard.scrollIntoView({ behavior: "smooth", block: "center" });
-
-      // Auto-fill track input with new ID
-      document.getElementById("trackInput").value = trackingId;
-
-      showToast(`Order placed! Tracking ID: ${trackingId}`, "success", 6000);
-
-      // ── STEP 4: WhatsApp redirect ──
-      // Build a pre-filled WhatsApp message with order details
-      const waMessage = encodeURIComponent(
-        `Hello Smart Pharmacy! 👋\n\nI just placed a prescription order.\n` +
-        `📋 *Order ID:* ${trackingId}\n` +
-        `👤 *Name:* ${name}\n` +
-        `📞 *Phone:* +91${phone}\n` +
-        `📍 *Address:* ${address}\n\n` +
-        `🖼️ *View Prescription:* ${imageUrl}\n\n` +
-        `Please confirm my order. Thank you!`
-      );
-      const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${waMessage}`;
-
-      // Open WhatsApp in new tab after a short delay
-      setTimeout(() => { window.open(waUrl, "_blank"); }, 1200);
-
-    } catch (err) {
-      console.error("Order submission error:", err);
-      showToast("Something went wrong. Please try again.", "error");
-      submitBtn.disabled  = false;
-      submitText.textContent = "Submit Order";
-      document.getElementById("uploadProgressWrap").classList.add("hidden");
+      return id;
     }
-  });
 
-  // ─────────────────────────────────────────────
-  // 🔍 TRACK ORDER – Fetch from Firestore
-  // ─────────────────────────────────────────────
+    // ─────────────────────────────────────────────
+    // 🔔 Toast Notification Helper
+    // type: 'success' | 'error' | 'info'
+    // ─────────────────────────────────────────────
+    function showToast(msg, type = "info", duration = 4000) {
+      const toast = document.getElementById("toast");
+      const icons = { success: "✅", error: "❌", info: "ℹ️" };
+      toast.className = `toast ${type} show`;
+      document.getElementById("toastMsg").textContent = msg;
+      document.getElementById("toastIcon").textContent = icons[type];
+      setTimeout(() => { toast.classList.remove("show"); }, duration);
+    }
 
-  // Status → step index mapping
-  const STATUS_STEPS = [
-    { label: "Received",   icon: "1" },
-    { label: "Verified",   icon: "2" },
-    { label: "Packed",     icon: "3" },
-    { label: "Dispatched", icon: "4" },
-    { label: "Delivered",  icon: "5" }
-  ];
+    // ─────────────────────────────────────────────
+    // 📁 File Input & Drag-Drop Logic
+    // ─────────────────────────────────────────────
+    const dropZone = document.getElementById("dropZone");
+    const rxFile = document.getElementById("rxFile");
 
-  // Status badge colors
-  const STATUS_COLORS = {
-    "Received":   { bg: "#e0f2fe", text: "#075985" },
-    "Verified":   { bg: "#f0fdf4", text: "#166534" },
-    "Packed":     { bg: "#fef9c3", text: "#854d0e" },
-    "Dispatched": { bg: "#fce7f3", text: "#9d174d" },
-    "Delivered":  { bg: "#dcfce7", text: "#14532d" }
-  };
+    // File selected via input
+    rxFile.addEventListener("change", () => handleFileSelect(rxFile.files[0]));
 
-  async function trackOrder() {
-    const id = document.getElementById("trackInput").value.trim().toUpperCase();
-    if (!id) { showToast("Please enter a Tracking ID.", "info"); return; }
+    // Drag over styling
+    dropZone.addEventListener("dragover", (e) => {
+      e.preventDefault();
+      dropZone.classList.add("dragover");
+    });
+    dropZone.addEventListener("dragleave", () => dropZone.classList.remove("dragover"));
 
-    const resultDiv   = document.getElementById("trackResult");
-    const notFoundDiv = document.getElementById("trackNotFound");
-    resultDiv.classList.add("hidden");
-    notFoundDiv.classList.add("hidden");
+    // File dropped
+    dropZone.addEventListener("drop", (e) => {
+      e.preventDefault();
+      dropZone.classList.remove("dragover");
+      const file = e.dataTransfer.files[0];
+      if (file) { rxFile.files = e.dataTransfer.files; handleFileSelect(file); }
+    });
 
-    try {
-      // ── Fetch order document from Firestore by tracking ID ──
-      const doc = await db.collection("orders").doc(id).get();
+    // Show image preview when file selected
+    function handleFileSelect(file) {
+      if (!file) return;
+      document.getElementById("fileErr").classList.add("hidden");
+      const wrap = document.getElementById("imagePreviewWrap");
+      const preview = document.getElementById("imagePreview");
+      const name = document.getElementById("fileName");
+      name.textContent = `📄 ${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
+      wrap.classList.remove("hidden");
+      if (file.type.startsWith("image/")) {
+        const reader = new FileReader();
+        reader.onload = (e) => { preview.src = e.target.result; preview.classList.remove("hidden"); };
+        reader.readAsDataURL(file);
+      } else {
+        preview.classList.add("hidden"); // PDF: just show filename
+      }
+    }
 
-      if (!doc.exists) {
-        // Order not found
-        notFoundDiv.classList.remove("hidden");
-        notFoundDiv.scrollIntoView({ behavior: "smooth", block: "center" });
+    // ─────────────────────────────────────────────
+    // ✅ Form Validation
+    // ─────────────────────────────────────────────
+    function validateForm() {
+      let valid = true;
+
+      const name = document.getElementById("fName").value.trim();
+      const phone = document.getElementById("fPhone").value.trim();
+      const address = document.getElementById("fAddress").value.trim();
+      const file = document.getElementById("rxFile").files[0];
+
+      // Name
+      if (!name) {
+        document.getElementById("nameErr").classList.remove("hidden"); valid = false;
+      } else {
+        document.getElementById("nameErr").classList.add("hidden");
+      }
+      // Phone (10 digits)
+      if (!/^\d{10}$/.test(phone)) {
+        document.getElementById("phoneErr").classList.remove("hidden"); valid = false;
+      } else {
+        document.getElementById("phoneErr").classList.add("hidden");
+      }
+      // Address
+      if (!address || address.length < 10) {
+        document.getElementById("addrErr").classList.remove("hidden"); valid = false;
+      } else {
+        document.getElementById("addrErr").classList.add("hidden");
+      }
+      // File
+      if (!file) {
+        document.getElementById("fileErr").classList.remove("hidden"); valid = false;
+      } else {
+        document.getElementById("fileErr").classList.add("hidden");
+      }
+      return valid;
+    }
+
+    // ─────────────────────────────────────────────
+    // 📤 FORM SUBMIT → Firebase Upload
+    // ─────────────────────────────────────────────
+    document.getElementById("rxForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!validateForm()) return;
+
+      const submitBtn = document.getElementById("submitBtn");
+      const submitText = document.getElementById("submitBtnText");
+      submitBtn.disabled = true;
+      submitText.textContent = "Uploading…";
+
+      const name = document.getElementById("fName").value.trim();
+      const phone = document.getElementById("fPhone").value.trim();
+      const address = document.getElementById("fAddress").value.trim();
+      const notes = document.getElementById("fNotes").value.trim();
+      const file = document.getElementById("rxFile").files[0];
+
+      // Generate a unique tracking ID for this order
+      const trackingId = generateTrackingId();
+
+      try {
+        // ── STEP 1: Upload prescription image to ImgBB (Free, No Card Required) ──
+        document.getElementById("uploadProgressWrap").classList.remove("hidden");
+        document.getElementById("uploadBar").style.width = "40%";
+        document.getElementById("uploadPct").textContent = "Uploading image...";
+
+        const formData = new FormData();
+        formData.append("image", file);
+
+        const imgbbResponse = await fetch(`https://api.imgbb.com/1/upload?key=${IMGBB_API_KEY}`, {
+          method: "POST",
+          body: formData
+        });
+        const imgbbData = await imgbbResponse.json();
+
+        if (!imgbbData.success) {
+          throw new Error("Image upload failed: " + (imgbbData.error ? imgbbData.error.message : "Unknown error"));
+        }
+
+        const imageUrl = imgbbData.data.url;
+        document.getElementById("uploadBar").style.width = "100%";
+        document.getElementById("uploadPct").textContent = "100%";
+
+        // ── STEP 2: Write order data to Firestore ──
+        // Collection: "orders" | Document ID: trackingId
+        await db.collection("orders").doc(trackingId).set({
+          trackingId,                   // Unique order ID
+          name,                          // Patient name
+          phone,                         // Patient phone (for reference)
+          address,                       // Delivery address
+          notes,                         // Optional notes
+          prescriptionUrl: imageUrl,     // Firebase Storage download URL
+          status: "Received",            // Initial status
+          createdAt: firebase.firestore.FieldValue.serverTimestamp() // Server timestamp
+        });
+
+        // ── STEP 3: Show success UI ──
+        document.getElementById("rxForm").closest("section").classList.add("hidden");
+        const successCard = document.getElementById("successCard");
+        successCard.classList.remove("hidden");
+        document.getElementById("trackingIdDisplay").textContent = trackingId;
+        successCard.scrollIntoView({ behavior: "smooth", block: "center" });
+
+        // Auto-fill track input with new ID
+        document.getElementById("trackInput").value = trackingId;
+
+        showToast(`Order placed! Tracking ID: ${trackingId}`, "success", 6000);
+
+        // ── STEP 4: WhatsApp redirect ──
+        // Build a pre-filled WhatsApp message with order details
+        const waMessage = encodeURIComponent(
+          `Hello Smart Pharmacy! 👋\n\nI just placed a prescription order.\n` +
+          `📋 *Order ID:* ${trackingId}\n` +
+          `👤 *Name:* ${name}\n` +
+          `📞 *Phone:* +91${phone}\n` +
+          `📍 *Address:* ${address}\n\n` +
+          `🖼️ *View Prescription:* ${imageUrl}\n\n` +
+          `Please confirm my order. Thank you!`
+        );
+        const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${waMessage}`;
+
+        // Open WhatsApp in new tab after a short delay
+        setTimeout(() => { window.open(waUrl, "_blank"); }, 1200);
+
+      } catch (err) {
+        console.error("Order submission error:", err);
+        showToast("Something went wrong. Please try again.", "error");
+        submitBtn.disabled = false;
+        submitText.textContent = "Submit Order";
+        document.getElementById("uploadProgressWrap").classList.add("hidden");
+      }
+    });
+
+    // ─────────────────────────────────────────────
+    // 🔍 TRACK ORDER – Fetch from Firestore
+    // ─────────────────────────────────────────────
+
+    // Status → step index mapping
+    const STATUS_STEPS = [
+      { label: "Received", icon: "1" },
+      { label: "Verified", icon: "2" },
+      { label: "Packed", icon: "3" },
+      { label: "Dispatched", icon: "4" },
+      { label: "Delivered", icon: "5" }
+    ];
+
+    // Status badge colors
+    const STATUS_COLORS = {
+      "Received": { bg: "#e0f2fe", text: "#075985" },
+      "Verified": { bg: "#f0fdf4", text: "#166534" },
+      "Packed": { bg: "#fef9c3", text: "#854d0e" },
+      "Dispatched": { bg: "#fce7f3", text: "#9d174d" },
+      "Delivered": { bg: "#dcfce7", text: "#14532d" }
+    };
+
+    async function trackOrder() {
+      const id = document.getElementById("trackInput").value.trim().toUpperCase();
+      if (!id) { showToast("Please enter a Tracking ID.", "info"); return; }
+
+      const resultDiv = document.getElementById("trackResult");
+      const notFoundDiv = document.getElementById("trackNotFound");
+      resultDiv.classList.add("hidden");
+      notFoundDiv.classList.add("hidden");
+
+      try {
+        // ── Fetch order document from Firestore by tracking ID ──
+        const doc = await db.collection("orders").doc(id).get();
+
+        if (!doc.exists) {
+          // Order not found
+          notFoundDiv.classList.remove("hidden");
+          notFoundDiv.scrollIntoView({ behavior: "smooth", block: "center" });
+          return;
+        }
+
+        const data = doc.data();
+
+        // ── Populate order summary ──
+        document.getElementById("trOrderId").textContent = data.trackingId;
+        document.getElementById("trName").textContent = data.name;
+        document.getElementById("trAddress").textContent = data.address;
+
+        // Format timestamp
+        if (data.createdAt) {
+          const d = data.createdAt.toDate();
+          document.getElementById("trDate").textContent = d.toLocaleString("en-IN", {
+            dateStyle: "medium", timeStyle: "short"
+          });
+        } else {
+          document.getElementById("trDate").textContent = "Just now";
+        }
+
+        // ── Status badge ──
+        const status = data.status || "Received";
+        const badge = document.getElementById("trStatusBadge");
+        const color = STATUS_COLORS[status] || { bg: "#f3f4f6", text: "#374151" };
+        badge.textContent = status;
+        badge.style.background = color.bg;
+        badge.style.color = color.text;
+
+        // ── Progress Steps ──
+        const stepIdx = STATUS_STEPS.findIndex(s => s.label === status);
+        renderProgressSteps(stepIdx);
+
+        // Show the result card
+        resultDiv.classList.remove("hidden");
+        resultDiv.scrollIntoView({ behavior: "smooth", block: "center" });
+
+      } catch (err) {
+        console.error("Track order error:", err);
+        showToast("Failed to fetch order. Check your connection.", "error");
+      }
+    }
+
+    // Render the step progress row and labels
+    function renderProgressSteps(activeIdx) {
+      const row = document.getElementById("progressStepsRow");
+      const labels = document.getElementById("progressLabels");
+      row.innerHTML = "";
+      labels.innerHTML = "";
+
+      STATUS_STEPS.forEach((step, i) => {
+        // Step dot
+        const dot = document.createElement("div");
+        dot.className = "step-dot";
+        if (i < activeIdx) dot.classList.add("done");
+        else if (i === activeIdx) dot.classList.add("active");
+
+        if (i < activeIdx) {
+          dot.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>`;
+        } else {
+          dot.textContent = step.icon;
+        }
+        row.appendChild(dot);
+
+        // Connector line between dots
+        if (i < STATUS_STEPS.length - 1) {
+          const line = document.createElement("div");
+          line.className = "step-line" + (i < activeIdx ? " done" : "");
+          row.appendChild(line);
+        }
+
+        // Label
+        const lbl = document.createElement("div");
+        lbl.className = "text-xs text-center flex-1";
+        lbl.style.color = i <= activeIdx ? "var(--teal)" : "var(--muted)";
+        lbl.style.fontWeight = i === activeIdx ? "600" : "400";
+        lbl.textContent = step.label;
+        labels.appendChild(lbl);
+      });
+    }
+
+    // ─────────────────────────────────────────────
+    // 📞 Call Now
+    // ─────────────────────────────────────────────
+    function callNow() {
+      window.location.href = `tel:${CALL_NUMBER}`;
+    }
+
+    // ─────────────────────────────────────────────
+    // 🔄 Reset form to place another order
+    // ─────────────────────────────────────────────
+    function resetForm() {
+      document.getElementById("successCard").classList.add("hidden");
+      const uploadSection = document.querySelector("#upload").parentElement || document.querySelector("section:nth-of-type(3)");
+      // Show upload section again
+      document.querySelectorAll("section").forEach(s => {
+        if (s.id === "upload") s.classList.remove("hidden");
+      });
+      document.getElementById("rxForm").reset();
+      document.getElementById("imagePreviewWrap").classList.add("hidden");
+      document.getElementById("uploadProgressWrap").classList.add("hidden");
+      document.getElementById("uploadBar").style.width = "0%";
+      document.getElementById("submitBtn").disabled = false;
+      document.getElementById("submitBtnText").textContent = "Submit Order";
+      document.getElementById("upload").scrollIntoView({ behavior: "smooth" });
+    }
+
+    // ─────────────────────────────────────────────
+    // 🗺 Scroll helpers
+    // ─────────────────────────────────────────────
+    function scrollToTrack() {
+      document.getElementById("track").scrollIntoView({ behavior: "smooth" });
+      setTimeout(trackOrder, 500);
+    }
+
+    // ─────────────────────────────────────────────
+    // 📱 Mobile menu toggle
+    // ─────────────────────────────────────────────
+    document.getElementById("menuToggle").addEventListener("click", () => {
+      document.getElementById("mobileMenu").classList.toggle("hidden");
+    });
+    function closeMobileMenu() {
+      document.getElementById("mobileMenu").classList.add("hidden");
+    }
+
+    // ─────────────────────────────────────────────
+    // 🖼️ Logo Upload Handler
+    // ─────────────────────────────────────────────
+    function handleLogoUpload(event) {
+      const file = event.target.files[0];
+      if (file && file.type.startsWith("image/")) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          document.getElementById("navLogoImg").src = e.target.result;
+          document.getElementById("navLogoImg").classList.remove("hidden");
+          document.getElementById("navLogoText").classList.add("hidden");
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    // ─────────────────────────────────────────────
+    // 📍 Geolocation Handler
+    // ─────────────────────────────────────────────
+    function getLocation() {
+      const btn = document.getElementById("locationBtn");
+      const addrField = document.getElementById("fAddress");
+
+      if (!navigator.geolocation) {
+        showToast("Geolocation is not supported by your browser.", "error");
         return;
       }
 
-      const data = doc.data();
+      btn.innerHTML = `<svg class="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg> Locating...`;
 
-      // ── Populate order summary ──
-      document.getElementById("trOrderId").textContent = data.trackingId;
-      document.getElementById("trName").textContent    = data.name;
-      document.getElementById("trAddress").textContent = data.address;
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          const mapsLink = `https://www.google.com/maps?q=${lat},${lng}`;
 
-      // Format timestamp
-      if (data.createdAt) {
-        const d = data.createdAt.toDate();
-        document.getElementById("trDate").textContent = d.toLocaleString("en-IN", {
-          dateStyle: "medium", timeStyle: "short"
-        });
-      } else {
-        document.getElementById("trDate").textContent = "Just now";
-      }
+          if (!addrField.value.includes("Google Maps")) {
+            addrField.value += (addrField.value ? "\n" : "") + "Google Maps: " + mapsLink + "\n";
+          }
 
-      // ── Status badge ──
-      const status = data.status || "Received";
-      const badge  = document.getElementById("trStatusBadge");
-      const color  = STATUS_COLORS[status] || { bg: "#f3f4f6", text: "#374151" };
-      badge.textContent = status;
-      badge.style.background = color.bg;
-      badge.style.color      = color.text;
-
-      // ── Progress Steps ──
-      const stepIdx = STATUS_STEPS.findIndex(s => s.label === status);
-      renderProgressSteps(stepIdx);
-
-      // Show the result card
-      resultDiv.classList.remove("hidden");
-      resultDiv.scrollIntoView({ behavior: "smooth", block: "center" });
-
-    } catch (err) {
-      console.error("Track order error:", err);
-      showToast("Failed to fetch order. Check your connection.", "error");
+          btn.innerHTML = `<svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Added`;
+          showToast("GPS Location captured successfully!", "success");
+        },
+        (error) => {
+          btn.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg> Use GPS Location`;
+          showToast("Unable to fetch location. Please allow permissions.", "error");
+        },
+        { enableHighAccuracy: true, timeout: 10000 }
+      );
     }
-  }
-
-  // Render the step progress row and labels
-  function renderProgressSteps(activeIdx) {
-    const row    = document.getElementById("progressStepsRow");
-    const labels = document.getElementById("progressLabels");
-    row.innerHTML = "";
-    labels.innerHTML = "";
-
-    STATUS_STEPS.forEach((step, i) => {
-      // Step dot
-      const dot = document.createElement("div");
-      dot.className = "step-dot";
-      if (i < activeIdx) dot.classList.add("done");
-      else if (i === activeIdx) dot.classList.add("active");
-
-      if (i < activeIdx) {
-        dot.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>`;
-      } else {
-        dot.textContent = step.icon;
-      }
-      row.appendChild(dot);
-
-      // Connector line between dots
-      if (i < STATUS_STEPS.length - 1) {
-        const line = document.createElement("div");
-        line.className = "step-line" + (i < activeIdx ? " done" : "");
-        row.appendChild(line);
-      }
-
-      // Label
-      const lbl = document.createElement("div");
-      lbl.className = "text-xs text-center flex-1";
-      lbl.style.color = i <= activeIdx ? "var(--teal)" : "var(--muted)";
-      lbl.style.fontWeight = i === activeIdx ? "600" : "400";
-      lbl.textContent = step.label;
-      labels.appendChild(lbl);
-    });
-  }
-
-  // ─────────────────────────────────────────────
-  // 📞 Call Now
-  // ─────────────────────────────────────────────
-  function callNow() {
-    window.location.href = `tel:${CALL_NUMBER}`;
-  }
-
-  // ─────────────────────────────────────────────
-  // 🔄 Reset form to place another order
-  // ─────────────────────────────────────────────
-  function resetForm() {
-    document.getElementById("successCard").classList.add("hidden");
-    const uploadSection = document.querySelector("#upload").parentElement || document.querySelector("section:nth-of-type(3)");
-    // Show upload section again
-    document.querySelectorAll("section").forEach(s => {
-      if (s.id === "upload") s.classList.remove("hidden");
-    });
-    document.getElementById("rxForm").reset();
-    document.getElementById("imagePreviewWrap").classList.add("hidden");
-    document.getElementById("uploadProgressWrap").classList.add("hidden");
-    document.getElementById("uploadBar").style.width = "0%";
-    document.getElementById("submitBtn").disabled = false;
-    document.getElementById("submitBtnText").textContent = "Submit Order";
-    document.getElementById("upload").scrollIntoView({ behavior: "smooth" });
-  }
-
-  // ─────────────────────────────────────────────
-  // 🗺 Scroll helpers
-  // ─────────────────────────────────────────────
-  function scrollToTrack() {
-    document.getElementById("track").scrollIntoView({ behavior: "smooth" });
-    setTimeout(trackOrder, 500);
-  }
-
-  // ─────────────────────────────────────────────
-  // 📱 Mobile menu toggle
-  // ─────────────────────────────────────────────
-  document.getElementById("menuToggle").addEventListener("click", () => {
-    document.getElementById("mobileMenu").classList.toggle("hidden");
-  });
-  function closeMobileMenu() {
-    document.getElementById("mobileMenu").classList.add("hidden");
-  }
-
-  // ─────────────────────────────────────────────
-  // 🖼️ Logo Upload Handler
-  // ─────────────────────────────────────────────
-  function handleLogoUpload(event) {
-    const file = event.target.files[0];
-    if (file && file.type.startsWith("image/")) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        document.getElementById("navLogoImg").src = e.target.result;
-        document.getElementById("navLogoImg").classList.remove("hidden");
-        document.getElementById("navLogoText").classList.add("hidden");
-      };
-      reader.readAsDataURL(file);
-    }
-  }
-
-  // ─────────────────────────────────────────────
-  // 📍 Geolocation Handler
-  // ─────────────────────────────────────────────
-  function getLocation() {
-    const btn = document.getElementById("locationBtn");
-    const addrField = document.getElementById("fAddress");
-
-    if (!navigator.geolocation) {
-      showToast("Geolocation is not supported by your browser.", "error");
-      return;
-    }
-
-    btn.innerHTML = `<svg class="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg> Locating...`;
-    
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const lat = position.coords.latitude;
-        const lng = position.coords.longitude;
-        const mapsLink = `https://www.google.com/maps?q=${lat},${lng}`;
-        
-        if (!addrField.value.includes("Google Maps")) {
-             addrField.value += (addrField.value ? "\n" : "") + "Google Maps: " + mapsLink + "\n";
-        }
-        
-        btn.innerHTML = `<svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg> Added`;
-        showToast("GPS Location captured successfully!", "success");
-      },
-      (error) => {
-        btn.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg> Use GPS Location`;
-        showToast("Unable to fetch location. Please allow permissions.", "error");
-      },
-      { enableHighAccuracy: true, timeout: 10000 }
-    );
-  }
-</script>
+  </script>
 
 </body>
+
 </html>
