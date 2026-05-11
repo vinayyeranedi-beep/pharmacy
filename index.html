@@ -44,6 +44,7 @@
       color: var(--text);
       min-height: 100vh;
       overflow-x: hidden;
+      scroll-behavior: smooth;
     }
 
     h1,
@@ -112,11 +113,10 @@
       box-shadow: 0 8px 32px rgba(13, 148, 136, 0.15);
     }
 
-    /* ─── Upload zone ─── */
-    .upload-zone {
-      border: 2.5px dashed #94a3b8;
-      border-radius: 1rem;
-      transition: all 0.3s;
+    /* ─── Logo upload area hover effect ─── */
+    .logo-container:hover #clearLogoBtn {
+      opacity: 1;
+    }
       cursor: pointer;
       background: #f8fafc;
     }
@@ -396,17 +396,20 @@
   <!-- ══════════════════════════════════════════
      NAVIGATION
 ══════════════════════════════════════════ -->
-  <nav class="hero-bg text-white sticky top-0 z-50 shadow-lg">
+  <nav class="hero-bg text-white sticky top-0 z-50 shadow-lg" style="position:relative; z-index:9999; pointer-events:auto;">
     <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
       <div class="flex items-center gap-3">
         <!-- Logo Placeholder Spot -->
-        <div
-          class="h-10 w-24 bg-white/20 rounded border border-white/40 flex items-center justify-center text-xs font-bold uppercase tracking-wider cursor-pointer hover:bg-white/30 transition"
-          title="Click to upload your logo" onclick="document.getElementById('logoUpload').click()">
-          <img id="navLogoImg" src="" alt="LOGO" class="hidden h-full w-full object-contain" />
-          <span id="navLogoText">Logo</span>
+        <div class="relative logo-container">
+          <label
+            class="relative h-10 w-24 bg-white/20 rounded border border-white/40 flex items-center justify-center text-xs font-bold uppercase tracking-wider cursor-pointer hover:bg-white/30 transition overflow-hidden"
+            title="Click to upload your logo">
+            <img id="navLogoImg" src="logo.png" alt="Smart Pharmacy Logo" class="hidden h-full w-full object-contain" />
+            <span id="navLogoText">Upload Logo</span>
+            <input type="file" id="logoUpload" accept="image/*" class="absolute inset-0 opacity-0 w-full h-full cursor-pointer" onchange="handleLogoUpload(event)" />
+          </label>
+          <button id="clearLogoBtn" class="absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-4 h-4 text-xs opacity-0 transition-opacity hover:bg-red-600 hidden" title="Clear logo" onclick="clearLogo()">×</button>
         </div>
-        <input type="file" id="logoUpload" accept="image/*" class="hidden" onchange="handleLogoUpload(event)" />
         <span class="font-bold text-3xl" style="font-family:'Playfair Display',serif; letter-spacing: 0.5px;">Smart
           Pharmacy</span>
       </div>
@@ -1284,7 +1287,15 @@
     // 🗺 Scroll helpers
     // ─────────────────────────────────────────────
     function scrollToTrack() {
-      document.getElementById("track").scrollIntoView({ behavior: "smooth" });
+      const element = document.getElementById("track");
+      const offset = 80; // Offset for sticky nav
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
       setTimeout(trackOrder, 500);
     }
 
@@ -1306,13 +1317,56 @@
       if (file && file.type.startsWith("image/")) {
         const reader = new FileReader();
         reader.onload = (e) => {
-          document.getElementById("navLogoImg").src = e.target.result;
+          const imageData = e.target.result;
+          document.getElementById("navLogoImg").src = imageData;
           document.getElementById("navLogoImg").classList.remove("hidden");
           document.getElementById("navLogoText").classList.add("hidden");
+          document.getElementById("clearLogoBtn").classList.remove("hidden");
+          // Save to localStorage
+          localStorage.setItem("uploadedLogo", imageData);
         };
         reader.readAsDataURL(file);
       }
     }
+
+    function clearLogo() {
+      document.getElementById("navLogoImg").src = "";
+      document.getElementById("navLogoImg").classList.add("hidden");
+      document.getElementById("navLogoText").classList.remove("hidden");
+      document.getElementById("clearLogoBtn").classList.add("hidden");
+      localStorage.removeItem("uploadedLogo");
+    }
+
+    // Attempt to load the attached logo by default.
+    (function loadDefaultLogo() {
+      const logoImg = document.getElementById("navLogoImg");
+      const logoText = document.getElementById("navLogoText");
+      const clearBtn = document.getElementById("clearLogoBtn");
+
+      // Check for saved logo in localStorage first
+      const savedLogo = localStorage.getItem("uploadedLogo");
+      if (savedLogo) {
+        logoImg.src = savedLogo;
+        logoImg.classList.remove("hidden");
+        logoText.classList.add("hidden");
+        clearBtn.classList.remove("hidden");
+        return;
+      }
+
+      // Fallback to default logo if exists
+      const testImage = new Image();
+      testImage.onload = () => {
+        logoImg.classList.remove("hidden");
+        logoText.classList.add("hidden");
+        clearBtn.classList.add("hidden"); // Hide clear button for default logo
+      };
+      testImage.onerror = () => {
+        logoImg.classList.add("hidden");
+        logoText.classList.remove("hidden");
+        clearBtn.classList.add("hidden");
+      };
+      testImage.src = logoImg.src;
+    })();
 
     // ─────────────────────────────────────────────
     // 📍 Geolocation Handler
